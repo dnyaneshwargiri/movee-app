@@ -6,7 +6,7 @@ import { Movie } from '../types/movie';
 @Injectable({ providedIn: 'root' })
 export class MovieService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:8080/movies';
+  private baseUrl = 'http://localhost:3000/movies';
 
   getMovies(): Observable<Movie[]> {
     return this.http
