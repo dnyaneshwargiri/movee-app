@@ -1,0 +1,14 @@
+<div class="search-container">
+  <input
+    type="text"
+    placeholder="Search moovee..."
+    [(ngModel)]="searchTerm"
+    (input)="search()" />
+</div>
+
+<div class="grid">
+  <app-movie-card
+    *ngFor="let movie of filtered"
+    [movie]="movie">
+  </app-movie-card>
+</div>

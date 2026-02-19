@@ -1,0 +1,38 @@
+<div *ngIf="movie" class="detail-container">
+  <button class="back-btn" (click)="goBack()">← Back</button>
+
+  <div class="detail-content">
+    <img class="poster" [src]="movie['Image URL']" />
+
+    <div class="info">
+      <h1 class="title">{{ movie.Title }}</h1>
+
+      <div class="meta">
+        <span>{{ movie.Year }}</span>
+        <span>•</span>
+        <span>{{ movie.Directors }}</span>
+        <span>•</span>
+        <span>{{ movie.Rating }}</span>
+      </div>
+
+      <div class="genres">
+        <span *ngFor="let genre of genres" class="genre">
+          {{ genre }}
+        </span>
+      </div>
+
+      <p class="plot">
+        {{ movie.Plot }}
+      </p>
+
+      <div class="extra">
+        <p><strong>Actors:</strong> {{ movie.Actors }}</p>
+        <p>
+          <strong>Running Time:</strong>
+          {{ movie['Running Time (secs)'] / 60 | number: '1.0-0' }} min
+        </p>
+        <p><strong>Release Date:</strong> {{ movie['Release Date'] | date }}</p>
+      </div>
+    </div>
+  </div>
+</div>

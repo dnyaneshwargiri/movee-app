@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Pacifica';
+  src: url('./assets/fonts/Pacifico-Regular.ttf') format('truetype');
+}
+
+body {
+  margin: 0;
+  background: #111;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
