@@ -1,19 +1,24 @@
 <div class="card" (click)="goToDetail()">
   <div class="image-container">
-    <img [src]="movie['Image URL']" [alt]="movie.Title" />
-    <div class="rating-badge" [ngStyle]="{ background: ratingColor }">
-      {{ movie.Rating }}
-    </div>
+    @if (!imageError && movie['Image URL']) {
+      <img [src]="movie['Image URL']" [alt]="movie.Title" (error)="onImageError()" />
+    } @else {
+      <div class="placeholder">
+        <div class="icon">🎬</div>
+        <div class="text">Image Not Available</div>
+      </div>
+    }
   </div>
 
   <div class="card-content">
     <div class="year">{{ movie.Year }}</div>
     <h3 class="title">{{ movie.Title }}</h3>
-
     <div class="genres">
-      <span class="genre" *ngFor="let genre of genres">
-        {{ genre }}
-      </span>
+      @for (genre of genres; track genre) {
+        <span class="genre">
+          {{ genre }}
+        </span>
+      }
     </div>
   </div>
 </div>

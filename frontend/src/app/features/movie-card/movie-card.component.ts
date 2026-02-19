@@ -12,6 +12,7 @@ import { Movie } from '../../types/movie';
 })
 export class MovieCardComponent {
   @Input({ required: true }) movie!: Movie;
+  imageError = false;
 
   constructor(private router: Router) {}
 
@@ -22,13 +23,17 @@ export class MovieCardComponent {
   get ratingColor(): string {
     const rating = this.movie.Rating;
 
-    if (rating >= 8) return '#f5c518'; // yellow
-    if (rating >= 7) return '#4caf50'; // green
-    if (rating >= 6) return '#03a9f4'; // blue
-    return '#f44336'; // red
+    if (rating >= 8) return '#f5c518';
+    if (rating >= 7) return '#4caf50';
+    if (rating >= 6) return '#03a9f4';
+    return '#f44336';
   }
 
   goToDetail(): void {
-    this.router.navigate(['/movie', this.movie.Title]);
+    this.router.navigate(['/movie', encodeURIComponent(this.movie.Title)]);
+  }
+
+  onImageError(): void {
+    this.imageError = true;
   }
 }

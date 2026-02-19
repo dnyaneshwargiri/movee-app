@@ -1,0 +1,14 @@
+<div class="search-box">
+  <input
+    type="text"
+    placeholder="Search movies..."
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onInputChange()"
+  />
+
+  @if (searchTerm) {
+    <span class="clear-icon" (click)="clearSearch()"> ✖ </span>
+  } @else {
+    <span class="search-icon"> 🔍 </span>
+  }
+</div>

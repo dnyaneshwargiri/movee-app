@@ -1,39 +1,68 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../types/movie';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movie-detail',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './movie-detail.component.html',
-  styleUrl: './movie-detail.component.scss'
+  styleUrl: './movie-detail.component.scss',
 })
-export class MovieDetailComponent {
+export class MovieDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private movieService = inject(MovieService);
   private router = inject(Router);
 
-  movie?: Movie;
+  movie?: Movie | null;
+  imageError = false;
 
-  ngOnInit() {
-    const title = this.route.snapshot.paramMap.get('title');
+  private subscriptions: Subscription[] = [];
 
-    if (title) {
-      this.movieService.getMovieByTitle(title).subscribe({
-        next: movie => (this.movie = movie),
-        error: err => console.error(err)
-      });
-    }
+  ngOnInit(): void {
+    const subscription = this.route.paramMap.subscribe((params) => {
+      const title = params.get('title');
+      if (title) {
+        this.fetchMovie(decodeURIComponent(title));
+      }
+    });
+
+    this.subscriptions = [subscription];
+  }
+
+  fetchMovie(title: string): void {
+    this.movie = null;
+    this.imageError = false;
+
+    const subscription = this.movieService.getMovieByTitle(title).subscribe({
+      next: (movie) => {
+        this.movie = movie;
+      },
+      error: (err) => {
+        console.error(err);
+        this.movie = null;
+      },
+    });
+
+    this.subscriptions.push(subscription);
   }
 
   get genres(): string[] {
-    return this.movie?.Genres.split(',').map(g => g.trim()) ?? [];
+    return this.movie?.Genres.split(',').map((g) => g.trim()) ?? [];
   }
 
   goBack(): void {
     this.router.navigate(['/']);
+  }
+
+  onImageError(): void {
+    this.imageError = true;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 }

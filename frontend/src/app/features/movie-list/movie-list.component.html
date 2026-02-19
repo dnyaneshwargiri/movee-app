@@ -1,14 +1,23 @@
-<div class="search-container">
-  <input
-    type="text"
-    placeholder="Search moovee..."
-    [(ngModel)]="searchTerm"
-    (input)="search()" />
-</div>
+<div class="page-container">
+  <app-search-box (search)="onSearch($event)"></app-search-box>
 
-<div class="grid">
-  <app-movie-card
-    *ngFor="let movie of filtered"
-    [movie]="movie">
-  </app-movie-card>
+  <div class="grid">
+    @for (movie of movies; track movie.Title) {
+      <app-movie-card [movie]="movie"></app-movie-card>
+    }
+  </div>
+
+  @if (loading) {
+    <div class="loading">
+      <div class="spinner"></div>
+    </div>
+  }
+
+  @if (!hasMore && movies.length > 0) {
+    <div class="end-message">🎬 No more movies to load</div>
+  }
+
+  @if (!loading && movies.length === 0) {
+    <div class="end-message">No movies found</div>
+  }
 </div>
