@@ -29,7 +29,6 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.fetchMovie(decodeURIComponent(title));
       }
     });
-
     this.subscriptions = [subscription];
   }
 
@@ -46,7 +45,6 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.movie = null;
       },
     });
-
     this.subscriptions.push(subscription);
   }
 

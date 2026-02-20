@@ -1,4 +1,4 @@
-<div class="card" (click)="goToDetail()">
+<div class="card" (click)="goToDetail()" [style.border-color]="accentColor">
   <div class="image-container">
     @if (!imageError && movie['Image URL']) {
       <img [src]="movie['Image URL']" [alt]="movie.Title" (error)="onImageError()" />
@@ -8,11 +8,16 @@
         <div class="text">Image Not Available</div>
       </div>
     }
+    <div class="overlay-gradient"></div>
+  </div>
+
+  <div class="rating-badge" [style.background-color]="accentColor">
+    {{ movie.Rating || '0.0' }}
   </div>
 
   <div class="card-content">
     <div class="year">{{ movie.Year }}</div>
-    <h3 class="title">{{ movie.Title }}</h3>
+    <h6 class="title">{{ movie.Title }}</h6>
     <div class="genres">
       @for (genre of genres; track genre) {
         <span class="genre">

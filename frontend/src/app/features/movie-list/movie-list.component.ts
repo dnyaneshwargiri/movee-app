@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { FormsModule } from '@angular/forms';
@@ -22,8 +22,7 @@ export class MovieListComponent implements OnInit {
   hasMore = true;
   searchTerm = '';
   private subscriptions: Subscription[] = [];
-
-  constructor(private movieService: MovieService) {}
+  private movieService = inject(MovieService);
 
   ngOnInit(): void {
     this.loadMovies();
@@ -31,7 +30,6 @@ export class MovieListComponent implements OnInit {
 
   loadMovies(): void {
     if (this.loading || !this.hasMore) return;
-
     this.loading = true;
 
     const subscriptions = this.movieService

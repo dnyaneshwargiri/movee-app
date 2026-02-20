@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Movie } from '../../types/movie';
@@ -13,20 +13,17 @@ import { Movie } from '../../types/movie';
 export class MovieCardComponent {
   @Input({ required: true }) movie!: Movie;
   imageError = false;
+  accentColor: string = '';
 
-  constructor(private router: Router) {}
+  private palette = ['#FE797B', '#FFB750', '#90E969', '#36CEDC', '#A687CB'];
+  private router = inject(Router);
+
+  ngOnInit(): void {
+    this.accentColor = this.palette[Math.floor(Math.random() * this.palette.length)];
+  }
 
   get genres(): string[] {
     return this.movie.Genres.split(',').map((g) => g.trim());
-  }
-
-  get ratingColor(): string {
-    const rating = this.movie.Rating;
-
-    if (rating >= 8) return '#f5c518';
-    if (rating >= 7) return '#4caf50';
-    if (rating >= 6) return '#03a9f4';
-    return '#f44336';
   }
 
   goToDetail(): void {
