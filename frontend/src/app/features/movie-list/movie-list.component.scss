@@ -45,3 +45,12 @@
     gap: 1.2rem;
   }
 }
+
+.search-wrapper {
+  transition: opacity 0.3s ease;
+}
+
+.search-wrapper.hidden {
+  opacity: 0;
+  pointer-events: none;
+}

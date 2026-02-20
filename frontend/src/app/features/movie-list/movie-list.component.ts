@@ -1,4 +1,4 @@
-import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +6,7 @@ import { Movie } from '../../types/movie';
 import { CommonModule } from '@angular/common';
 import { SearchBoxComponent } from '../../shared/search-box/search-box.component';
 import { Subscription } from 'rxjs';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-movie-list',
@@ -23,6 +24,8 @@ export class MovieListComponent implements OnInit {
   searchTerm = '';
   private subscriptions: Subscription[] = [];
   private movieService = inject(MovieService);
+  searchService = inject(SearchService);
+  @ViewChild('searchSentinel') sentinel!: ElementRef;
 
   ngOnInit(): void {
     this.loadMovies();
@@ -70,6 +73,17 @@ export class MovieListComponent implements OnInit {
     this.movies = [];
     this.hasMore = true;
     this.loadMovies();
+  }
+  ngAfterViewInit() {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // If not intersecting, it means the search box has scrolled out of view
+        this.searchService.isSticky.set(!entry.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+
+    observer.observe(this.sentinel.nativeElement);
   }
 
   ngOnDestroy(): void {

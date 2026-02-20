@@ -54,3 +54,19 @@
   position: relative;
   z-index: 0;
 }
+
+.header-search {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+  flex: 1;
+  max-width: 400px;
+  margin: 0 20px;
+}
+
+.header-search.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
