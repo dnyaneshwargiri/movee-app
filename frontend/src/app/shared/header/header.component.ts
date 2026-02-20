@@ -21,28 +21,26 @@ export class HeaderComponent {
   pageSize = 20;
   loading = false;
   hasMore = true;
-  searchTerm = '';
 
   onSearch(query: string) {
     if (!query.trim()) return;
-    const subscription = this.movieService
-      .getMovies(this.page, this.pageSize, this.searchTerm)
-      .subscribe({
-        next: (response) => {
-          if (response.length < this.pageSize) {
-            this.hasMore = false;
-          }
-          this.movies = [...this.movies, ...response];
-          this.page++;
-          this.loading = false;
-        },
-        error: (err) => {
-          console.error(err);
-          this.loading = false;
-        },
-      });
+    // @TODO: Need to invoke same search logic here as from movie list component
+    // const subscription = this.movieService.getMovies(this.page, this.pageSize, query).subscribe({
+    //   next: (response) => {
+    //     if (response.length < this.pageSize) {
+    //       this.hasMore = false;
+    //     }
+    //     this.movies = [...this.movies, ...response];
+    //     this.page++;
+    //     this.loading = false;
+    //   },
+    //   error: (err) => {
+    //     console.error(err);
+    //     this.loading = false;
+    //   },
+    // });
 
-    this.subscriptions.push(subscription);
+    // this.subscriptions.push(subscription);
   }
 
   ngOnDestroy(): void {
