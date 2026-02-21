@@ -60,10 +60,10 @@ describe('HeaderComponent', () => {
     expect(searchContainer.nativeElement.classList.contains('visible')).toBe(false);
   });
 
-  it('should render the emoji image with correct dimensions', () => {
+  it('should render the avtar image with correct dimensions', () => {
     const img = fixture.debugElement.query(By.css('.emoji')).nativeElement;
     expect(img.getAttribute('width')).toBe('50');
     expect(img.getAttribute('height')).toBe('50');
-    expect(img.getAttribute('src')).toBe('/assets/emoji.png');
+    expect(img.getAttribute('src')).toBe('/assets/avatar.svg');
   });
 });

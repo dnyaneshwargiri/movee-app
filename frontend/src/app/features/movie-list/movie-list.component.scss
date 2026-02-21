@@ -51,14 +51,14 @@
   }
 
   .reset-link {
-    color: #ffb750;
+    color: var(--orange);
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
     transition: color 0.2s;
 
     &:hover {
-      color: #fe797b;
+      color: var(--red);
       text-decoration: underline;
     }
   }

@@ -25,7 +25,7 @@
 }
 
 .column h3 {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Pacifica', cursive;
   font-size: 28px;
   margin-bottom: 20px;
 }
@@ -49,10 +49,10 @@
   height: calc(100% + 30px);
   background: linear-gradient(
     90deg,
-    #fe797b 0% 25%,
-    #ffb750 25% 50%,
-    #90e969 50% 75%,
-    #a687cb 75% 100%
+    var(--red) 0% 25%,
+    var(--orange) 25% 50%,
+    var(--green) 50% 75%,
+    var(--purple) 75% 100%
   );
   transform: skewX(-35deg);
   margin-right: -120px;
