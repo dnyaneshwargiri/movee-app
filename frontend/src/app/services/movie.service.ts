@@ -14,7 +14,7 @@ export class MovieService {
   private baseUrl = 'http://localhost:3000/movies';
 
   getMovies(page: number, limit: number, search: string = '') {
-    let url = `http://localhost:3000/movies?_page=${page}&_limit=${limit}&_sort=Year&_order=desc`;
+    let url = `${this.baseUrl}?_page=${page}&_limit=${limit}&_sort=Year&_order=desc`;
     if (search) {
       url += `&Title_like=${search}`;
     }
@@ -28,6 +28,4 @@ export class MovieService {
       .get<Movie[]>(this.baseUrl, { params })
       .pipe(map((movies) => movies[0] ?? null));
   }
-
-  
 }
