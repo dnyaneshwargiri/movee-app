@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MovieService } from '../../services/movie.service';
@@ -16,6 +16,7 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private movieService = inject(MovieService);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   movie?: Movie | null;
   imageError = false;
@@ -39,10 +40,12 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
     const subscription = this.movieService.getMovieByTitle(title).subscribe({
       next: (movie) => {
         this.movie = movie;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
         this.movie = null;
+        this.cdr.detectChanges();
       },
     });
     this.subscriptions.push(subscription);
