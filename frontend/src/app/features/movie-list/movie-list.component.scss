@@ -24,7 +24,6 @@
   padding: 3rem 0;
 }
 
-
 @media (max-width: 600px) {
   .grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -39,4 +38,28 @@
 .search-wrapper.hidden {
   opacity: 0;
   pointer-events: none;
+}
+.end-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  width: 100%;
+
+  p {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+
+  .reset-link {
+    color: #ffb750;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #fe797b;
+      text-decoration: underline;
+    }
+  }
 }

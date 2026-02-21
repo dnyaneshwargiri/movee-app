@@ -7,7 +7,7 @@
   />
 
   <div class="icon-container">
-    @if (isSearching) {
+    @if (isSearching && showSpinner) {
       <app-spinner />
     } @else if (searchTerm) {
       <span class="clear-icon" (click)="clearSearch()"> ✖ </span>

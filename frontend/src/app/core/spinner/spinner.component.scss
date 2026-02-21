@@ -1,16 +1,18 @@
 :host {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 999999;
+  z-index: 10000;
   pointer-events: all;
+  transform: none !important;
+  width: 100vw;
+  height: 100vh;
 }
 
 .spinner {

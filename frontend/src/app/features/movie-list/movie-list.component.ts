@@ -111,6 +111,10 @@ export class MovieListComponent implements OnInit {
     observer.observe(this.sentinel.nativeElement);
   }
 
+  resetSearch(): void {
+    this.searchService.triggerSearch('');
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach((sub) => sub.unsubscribe());
   }

@@ -19,6 +19,12 @@
   }
 
   @if (!loading && movies.length === 0) {
-    <div class="end-message">No movies found</div>
+    <div class="end-message">
+      <p>
+        No movies found for search: "<strong>{{ searchTerm }}</strong
+        >"
+      </p>
+      <a href="javascript:void(0)" class="reset-link" (click)="resetSearch()"> Reset search </a>
+    </div>
   }
 </div>

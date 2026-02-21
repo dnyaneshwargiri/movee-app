@@ -16,6 +16,7 @@ import { SearchService } from '../../services/search.service';
 export class SearchBoxComponent implements OnDestroy {
   searchTerm = '';
   isSearching = false;
+  @Input() showSpinner: boolean = true;
   private searchService = inject(SearchService);
   private searchSubject = new Subject<string>();
   private searchSubscription: Subscription;
