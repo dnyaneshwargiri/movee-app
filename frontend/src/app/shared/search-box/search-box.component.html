@@ -6,9 +6,13 @@
     (ngModelChange)="onInputChange()"
   />
 
-  @if (searchTerm) {
-    <span class="clear-icon" (click)="clearSearch()"> ✖ </span>
-  } @else {
-    <span class="search-icon"> 🔍 </span>
-  }
+  <div class="icon-container">
+    @if (isSearching) {
+      <app-spinner />
+    } @else if (searchTerm) {
+      <span class="clear-icon" (click)="clearSearch()"> ✖ </span>
+    } @else {
+      <span class="search-icon"> 🔍 </span>
+    }
+  </div>
 </div>

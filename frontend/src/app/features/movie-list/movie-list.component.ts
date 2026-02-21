@@ -16,11 +16,12 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SearchBoxComponent } from '../../shared/search-box/search-box.component';
 import { Subscription } from 'rxjs';
 import { SearchService } from '../../services/search.service';
+import { SpinnerComponent } from '../../core/spinner/spinner.component';
 
 @Component({
   selector: 'app-movie-list',
   standalone: true,
-  imports: [CommonModule, MovieCardComponent, FormsModule, SearchBoxComponent],
+  imports: [CommonModule, MovieCardComponent, FormsModule, SearchBoxComponent, SpinnerComponent],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss',
 })

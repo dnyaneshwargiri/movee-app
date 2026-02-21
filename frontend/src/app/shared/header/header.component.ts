@@ -8,7 +8,6 @@ import { SearchBoxComponent } from '../search-box/search-box.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [SearchBoxComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })

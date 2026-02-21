@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { MovieService } from '../../services/movie.service';
 import { Movie } from '../../types/movie';
 import { Subscription } from 'rxjs';
+import { SpinnerComponent } from "../../core/spinner/spinner.component";
 
 @Component({
   selector: 'app-movie-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SpinnerComponent],
   templateUrl: './movie-detail.component.html',
   styleUrl: './movie-detail.component.scss',
 })
