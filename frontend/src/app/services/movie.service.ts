@@ -11,10 +11,10 @@ export interface PaginatedMovies {
 @Injectable({ providedIn: 'root' })
 export class MovieService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:3000/movies';
+  private baseUrl = 'https://movee-app.onrender.com';
 
   getMovies(page: number, limit: number, search: string = '') {
-    let url = `http://localhost:3000/movies?_page=${page}&_limit=${limit}&_sort=Year&_order=desc`;
+    let url = `${this.baseUrl}/movies?_page=${page}&_limit=${limit}&_sort=Year&_order=desc`;
     if (search) {
       url += `&Title_like=${search}`;
     }
@@ -25,9 +25,7 @@ export class MovieService {
     const params = new HttpParams().set('Title', title);
 
     return this.http
-      .get<Movie[]>(this.baseUrl, { params })
+      .get<Movie[]>(`${this.baseUrl}/movies`, { params })
       .pipe(map((movies) => movies[0] ?? null));
   }
-
-  
 }
