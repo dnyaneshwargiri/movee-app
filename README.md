@@ -101,7 +101,7 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Known Issues
 
 - The `Reset search` link in currently doesnt reset the search term in Search box(s) input. 
-
+- I'm not happy with the way I handled JSON's wrong naming convention in typescript, it can be improved further.
 
 ## Additional Resources
 
