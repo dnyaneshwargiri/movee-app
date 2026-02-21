@@ -45,6 +45,7 @@
 .emoji {
   width: 50px;
   height: 50px;
+  display: block;
 }
 
 .divider {
@@ -67,6 +68,6 @@
 
 .header-search.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(18px);
   pointer-events: auto;
 }

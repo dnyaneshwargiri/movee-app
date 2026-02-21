@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { Movie } from '../../types/movie';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SearchBoxComponent } from '../../shared/search-box/search-box.component';
-import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { SearchService } from '../../services/search.service';
 import { SpinnerComponent } from '../../core/spinner/spinner.component';
 
@@ -42,6 +42,14 @@ export class MovieListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMovies();
+
+    const searchSub = this.searchService.searchQuery$
+      .pipe(debounceTime(1000), distinctUntilChanged())
+      .subscribe((term) => {
+        this.performSearch(term);
+      });
+
+    this.subscriptions.push(searchSub);
   }
 
   loadMovies(): void {
@@ -85,22 +93,21 @@ export class MovieListComponent implements OnInit {
     }
   }
 
-  onSearch(term: string): void {
+  private performSearch(term: string): void {
     this.searchTerm = term;
-    this.page = 1;
     this.movies = [];
+    this.page = 1;
     this.hasMore = true;
     this.loadMovies();
   }
+
   ngAfterViewInit() {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // If not intersecting, it means the search box has scrolled out of view
         this.searchService.isSticky.set(!entry.isIntersecting);
       },
       { threshold: 0 },
     );
-
     observer.observe(this.sentinel.nativeElement);
   }
 

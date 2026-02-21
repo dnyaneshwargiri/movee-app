@@ -1,6 +1,6 @@
 <div class="page-container">
   <div #searchSentinel class="search-wrapper" [class.hidden]="searchService.isSticky()">
-    <app-search-box (search)="onSearch($event)"></app-search-box>
+    <app-search-box></app-search-box>
   </div>
   <div class="grid">
     @for (movie of movies; track movie.Title) {

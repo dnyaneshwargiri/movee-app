@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, inject, Input, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SpinnerComponent } from '../../core/spinner/spinner.component';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-search-box',
@@ -15,9 +16,7 @@ import { SpinnerComponent } from '../../core/spinner/spinner.component';
 export class SearchBoxComponent implements OnDestroy {
   searchTerm = '';
   isSearching = false;
-
-  @Output() search = new EventEmitter<string>();
-
+  private searchService = inject(SearchService);
   private searchSubject = new Subject<string>();
   private searchSubscription: Subscription;
 
@@ -26,7 +25,7 @@ export class SearchBoxComponent implements OnDestroy {
       .pipe(debounceTime(1000), distinctUntilChanged())
       .subscribe((term) => {
         this.isSearching = false;
-        this.search.emit(term);
+        this.searchService.triggerSearch(term);
       });
   }
 
@@ -38,7 +37,7 @@ export class SearchBoxComponent implements OnDestroy {
   clearSearch(): void {
     this.searchTerm = '';
     this.isSearching = false;
-    this.search.emit('');
+    this.searchService.triggerSearch('');
   }
 
   ngOnDestroy(): void {
